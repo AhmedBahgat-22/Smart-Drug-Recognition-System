@@ -1,0 +1,10 @@
+# Tested installation must be verified on a compatible Python environment.
+# Use Python 3.11 (recommended); run python -m pip install -r requirements.txt
+tensorflow>=2.16,<2.20
+numpy>=1.26,<2.2
+pillow>=10,<12
+matplotlib>=3.8,<4
+scikit-learn>=1.4,<2
+streamlit>=1.37,<2
+# Only needed for training / evaluation extensions, not the UI itself:
+opencv-python-headless>=4.8,<5

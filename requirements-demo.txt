@@ -1,0 +1,5 @@
+# Minimal dependencies for Streamlit inference demo (Python 3.11 recommended).
+tensorflow>=2.16,<2.20
+numpy>=1.26,<2.2
+pillow>=10,<12
+streamlit>=1.37,<2

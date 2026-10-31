@@ -3,47 +3,327 @@
 
 ### AI-Powered Medicine Packaging Image Classification
 
-**A Deep Learning & Computer Vision Project Using MobileNetV2, TensorFlow, Keras, and Streamlit**
+**Deep Learning | Computer Vision | MobileNetV2 | TensorFlow | Streamlit**
 
-Developed as a collaborative academic project at **Istanbul Arel University**.
+An academic team project developed at **Istanbul Arel University**.
 
 **Repository maintained by Ahmed Abdelmoula**
+
+[![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)](https://www.python.org/)
+[![TensorFlow](https://img.shields.io/badge/TensorFlow-2.19.1-orange?logo=tensorflow)](https://www.tensorflow.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-red?logo=streamlit)](https://streamlit.io/)
+![Project](https://img.shields.io/badge/Project-Academic_Research-teal)
+![Tests](https://img.shields.io/badge/Unit_Tests-4_Passed-brightgreen)
 
 ---
 
 ## 📌 Project Overview
 
-The **Smart Drug Recognition System** is an academic deep-learning application designed to classify images of medicine packaging into two categories:
+**Smart Drug Recognition System** is a deep-learning and computer-vision project that classifies medicine-packaging images into two categories:
 
-- ✅ **Original**
-- 🔍 **Counterfeit**
+- **Original**
+- **Counterfeit**
 
-The system uses a **MobileNetV2-based Convolutional Neural Network (CNN)** with transfer learning to identify visual patterns learned from labeled medicine-package images.
+The project uses a **MobileNetV2-based Convolutional Neural Network (CNN)** with transfer learning.
 
-An interactive **Streamlit dashboard** allows users to upload an image, explore the model's prediction, and review recorded performance metrics.
+An interactive Streamlit dashboard lets users upload an image, review the predicted class, and explore recorded model-evaluation results.
 
-> ⚠️ **Research Disclaimer:** This is an educational image-classification project, not a certified pharmaceutical authentication system. Predictions cannot establish whether a medicine is genuine, safe, effective, or suitable for use.
+> **⚠️ Research Disclaimer**
+>
+> This is an educational demonstration, not a certified medicine-authentication system. The predictions cannot verify whether a medicine is authentic, safe, effective, or suitable for use. Do not make medical or purchasing decisions based on the model output.
 
 ---
 
-## ✨ Key Features
+# 🚀 Quick Start — Run the Project Locally
+
+This section explains how to download and run the application on your own computer.
+
+**You do not need to retrain the AI model.** The trained `.keras` model is included in the repository.
+
+## 1. Prerequisites
+
+Before starting, make sure you have:
+
+| Requirement | Details |
+|---|---|
+| Python | Python 3.11 (64-bit) recommended |
+| Git | Required for cloning, optional for ZIP download |
+| Internet | Needed to install Python dependencies |
+| Disk space | At least 5 GB free recommended |
+| Editor | VS Code recommended |
+| OS | Windows tested; Linux/macOS require compatible dependencies |
+
+**Downloads:**
+
+- [Python](https://www.python.org/downloads/release/python-3119/)
+- [Git](https://git-scm.com/downloads)
+- [Visual Studio Code](https://code.visualstudio.com/)
+
+### Verify Python
+
+On Windows, open PowerShell and run:
+
+```powershell
+py -3.11 --version
+```
+
+Expected output:
+
+```text
+Python 3.11.x
+```
+
+If Python 3.11 is not found, install it before continuing.
+
+## 2. Download the Project
+
+### Option A — Clone with Git (Recommended)
+
+Open PowerShell or the VS Code terminal:
+
+```powershell
+git clone https://github.com/AhmedBahgat-22/Smart-Drug-Recognition-System.git
+cd Smart-Drug-Recognition-System
+```
+
+### Option B — Download ZIP
+
+1. Open the [GitHub repository](https://github.com/AhmedBahgat-22/Smart-Drug-Recognition-System).
+2. Click the green **Code** button.
+3. Select **Download ZIP**.
+4. Extract the ZIP file.
+5. Open the extracted project folder in VS Code using **File → Open Folder**.
+6. Open **Terminal → New Terminal**.
+
+Make sure the terminal is inside the project folder containing `README.md` and `requirements-demo.txt`.
+
+Verify the current folder:
+
+```powershell
+Test-Path .\requirements-demo.txt
+```
+
+Expected result:
+
+```text
+True
+```
+
+## 3. Create a Virtual Environment
+
+On Windows:
+
+```powershell
+py -3.11 -m venv .venv
+```
+
+Verify that Python was created inside the virtual environment:
+
+```powershell
+Test-Path .\.venv\Scripts\python.exe
+```
+
+Expected result:
+
+```text
+True
+```
+
+You can run the commands below directly using the virtual environment's Python executable. Activation is not required.
+
+## 4. Install the Required Libraries
+
+Run these commands from the project root:
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install --upgrade pip
+```
+
+Then:
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install --no-cache-dir -r requirements-demo.txt
+```
+
+This installs the libraries required to run the demo, including:
+
+- TensorFlow / Keras
+- Streamlit
+- NumPy
+- Pillow
+
+**Important:** TensorFlow requires substantial disk space. Make sure installation finishes without errors before continuing.
+
+### Verify the Installation
+
+```powershell
+.\.venv\Scripts\python.exe -m pip check
+```
+
+Then check the main frameworks:
+
+```powershell
+.\.venv\Scripts\python.exe -c "import tensorflow as tf; import streamlit; print('TensorFlow:', tf.__version__); print('Streamlit:', streamlit.__version__)"
+```
+
+The import command should print both installed versions without raising an exception.
+
+## 5. Verify the Project
+
+Check that the required project files are present:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/check_project.py
+```
+
+Run the included automated tests:
+
+```powershell
+.\.venv\Scripts\python.exe -m unittest discover -s tests -v
+```
+
+The four existing unit tests cover image preprocessing, class mapping, and invalid prediction scores.
+
+## 6. Launch the Streamlit Application
+
+Run:
+
+```powershell
+.\.venv\Scripts\python.exe -m streamlit run interface/app_ui.py
+```
+
+If Streamlit starts successfully, the terminal will display a local URL similar to:
+
+```text
+Local URL: http://localhost:8501
+```
+
+Open the displayed URL in your web browser.
+
+**Note:** `localhost` runs the application on your computer. It is not a publicly hosted website.
+
+## 7. Test the Application
+
+Once the dashboard opens:
+
+1. Navigate to **Prediction**.
+2. Upload a supported JPG, JPEG, PNG, or WEBP image.
+3. Review the image preview.
+4. Check the predicted Original / Counterfeit class.
+5. Explore the displayed model scores.
+6. Open **Model Performance** to view historical evaluation metrics.
+7. Open **About Project** to explore the architecture and documentation.
+
+The displayed model scores are not calibrated authenticity probabilities.
+
+### Stop the Application
+
+Press `Ctrl + C` in the terminal running Streamlit.
+
+---
+
+## 🐧 Linux / macOS Setup
+
+Python 3.11 and compatible TensorFlow dependencies are required.
+
+Clone the repository:
+
+```bash
+git clone https://github.com/AhmedBahgat-22/Smart-Drug-Recognition-System.git
+cd Smart-Drug-Recognition-System
+```
+
+Create and activate an environment:
+
+```bash
+python3.11 -m venv .venv
+source .venv/bin/activate
+```
+
+Install dependencies:
+
+```bash
+python -m pip install --upgrade pip
+python -m pip install --no-cache-dir -r requirements-demo.txt
+```
+
+Run the application:
+
+```bash
+python -m streamlit run interface/app_ui.py
+```
+
+Linux and macOS installation has not been independently verified for this project. Platform-specific dependency adjustments may be necessary.
+
+---
+
+# 🖥️ Interactive AI Dashboard
+
+The application provides three main sections.
+
+## 🔬 1. Prediction
+
+The prediction page allows users to upload medicine-package images and review model outputs.
+
+Features include:
+
+- Image upload and preview
+- File information and image dimensions
+- Original / Counterfeit classification
+- Model output scores
+- Prediction details
+- Image-processing workflow
+
+## 📊 2. Model Performance
+
+The dashboard displays recorded evaluation artifacts:
+
+- Test accuracy
+- Correct predictions
+- Number of evaluated images
+- Confusion matrix
+- Training accuracy
+- Training and validation loss
+- Classification report
+- Dataset summary
+
+## 📘 3. About Project
+
+The documentation page introduces:
+
+- Project overview
+- Technology stack
+- CNN processing pipeline
+- Research limitations
+- Project report and presentation
+- Saved prediction visualizations
+
+### Example Prediction Visualizations
+
+![Saved Prediction Examples](results/sample_predictions/sample_predictions_grid.png)
+
+*Historical prediction visualizations included with the team project.*
+
+---
+
+# ✨ Key Features
 
 | Feature | Description |
 |---|---|
-| 🧠 Deep Learning | MobileNetV2-based CNN with transfer learning |
-| 🖼️ Image Classification | Classifies packaging images into Original or Counterfeit |
-| 💻 Interactive Dashboard | Streamlit web interface with three sections |
-| 📊 Performance Analysis | Accuracy, loss plots, confusion matrix, and classification report |
-| 🔄 Image Preprocessing | RGB conversion and image resizing |
-| 💾 Saved AI Model | Reusable `.keras` model for inference |
-| 📁 Project Documentation | Academic report and presentation |
-| 🧪 Automated Tests | Tests for preprocessing, score validation, and class mapping |
+| 🧠 CNN Classification | MobileNetV2-based image classifier |
+| 🔄 Transfer Learning | Uses pretrained visual feature extraction |
+| 🖼️ Image Upload | Accepts supported medicine-package images |
+| 💻 Streamlit Dashboard | Interactive interface with three sections |
+| 📈 Performance Analysis | Recorded accuracy, loss, and confusion matrix |
+| 💾 Saved Model | Trained Keras model included |
+| 📚 Documentation | Project report and team presentation |
+| 🧪 Unit Testing | Four verified passing tests |
 
 ---
 
-## 📊 Model Performance
+# 📊 Model Performance
 
-The following results were recorded during the original project's evaluation.
+The following metrics come from saved evaluation results included in the repository.
 
 | Metric | Recorded Result |
 |---|---:|
@@ -54,109 +334,63 @@ The following results were recorded during the original project's evaluation.
 | Counterfeit Images | 36 |
 | Test Loss | 0.0833 |
 
-### Confusion Matrix
+These metrics are historical results from the team project, not a newly reproduced or independently validated evaluation.
+
+## Confusion Matrix
 
 ![Confusion Matrix](results/confusion_matrix/confusion_matrix.png)
 
-Recorded confusion matrix:
+The recorded matrix uses actual classes as rows and predicted classes as columns:
 
 ```text
-                    Predicted
+                     Predicted
                   Counterfeit  Original
 
 Actual Counterfeit     34         2
 Actual Original         1        63
 ```
 
-### Training Accuracy
+The model made three incorrect classifications out of 100 test images in the recorded evaluation.
+
+## Training Accuracy
 
 ![Training Accuracy](results/accuracy_loss_plots/accuracy.png)
 
-### Training and Validation Loss
+## Training and Validation Loss
 
 ![Training Loss](results/accuracy_loss_plots/loss.png)
 
-**Evaluation note:** These figures come from the saved project results. They have not been independently reproduced, and performance on unseen medicine products or different image conditions is unknown.
+**Evaluation limitation:** Performance on different medicine manufacturers, new packaging designs, lighting conditions, and unseen data distributions is not established.
 
 ---
 
-## 🖥️ Interactive AI Dashboard
+# 🏗️ System Architecture
 
-The application provides three main sections.
-
-### 1. 🔬 Prediction
-
-Upload a medicine-package image and explore the trained model's output.
-
-Features include:
-
-- Image upload (JPG, PNG, JPEG, and WEBP)
-- Uploaded image preview
-- Image dimensions and file information
-- Original / Counterfeit classification
-- Model output scores
-- Technical prediction details
-- Image-processing workflow
-
-### 2. 📊 Model Performance
-
-Explore the recorded evaluation results:
-
-- Test accuracy
-- Number of evaluated images
-- Correct classifications
-- Confusion matrix
-- Training and validation accuracy
-- Training and validation loss
-- Classification report
-- Dataset summary
-
-### 3. 📘 About Project
-
-Explore the technologies and research workflow behind the project:
-
-- Project overview
-- Technology stack
-- Processing pipeline
-- Research limitations
-- Academic report and presentation
-- Saved prediction visualizations
-
-### Example Prediction Visualizations
-
-![Model Prediction Examples](results/sample_predictions/sample_predictions_grid.png)
-
-*Saved example visualizations from the original team project.*
-
----
-
-## 🏗️ System Architecture
-
-The application follows this workflow:
+The application follows this image-classification pipeline:
 
 ```text
-              MEDICINE PACKAGE IMAGE
+               MEDICINE PACKAGE IMAGE
                          |
                          v
-                  IMAGE UPLOAD
+                    IMAGE UPLOAD
                          |
                          v
-                 PREPROCESSING
-                 - RGB conversion
-                 - Image resizing
+                    PREPROCESSING
+                    - RGB conversion
+                    - Image resizing
                          |
                          v
-               MOBILENETV2-BASED CNN
+                MOBILENETV2-BASED CNN
                          |
                          v
-                 BINARY CLASSIFIER
+                  BINARY CLASSIFIER
                          |
-               +---------+---------+
-               |                   |
-               v                   v
-            ORIGINAL          COUNTERFEIT
-               |                   |
-               +---------+---------+
+                  +------+------+
+                  |             |
+                  v             v
+               ORIGINAL     COUNTERFEIT
+                  |             |
+                  +------+------+
                          |
                          v
                  STREAMLIT DASHBOARD
@@ -164,193 +398,97 @@ The application follows this workflow:
                  - Model output score
 ```
 
-### Deep Learning Architecture
+## Deep Learning Architecture
 
-The model uses **MobileNetV2**, a convolutional neural network originally developed for efficient visual feature extraction.
+The system uses **MobileNetV2**, a CNN architecture designed for efficient visual feature extraction.
 
-The project applies transfer learning using ImageNet-pretrained weights and includes training and fine-tuning code.
+The training code includes transfer learning with ImageNet-pretrained weights and model fine-tuning.
 
-The saved trained model is loaded for inference without requiring retraining.
+The saved model can perform inference without retraining.
+
+The output is a visual classification, not an inspection of the medicine's ingredients or manufacturing authenticity.
 
 ---
 
-## 🛠️ Technology Stack
+# 🛠️ Technology Stack
 
 | Technology | Purpose |
 |---|---|
-| Python 3.11 | Recommended development environment |
+| Python 3.11 | Recommended Python environment |
 | TensorFlow | Deep learning framework |
-| Keras | Neural network training and inference |
-| MobileNetV2 | CNN feature extraction architecture |
-| NumPy | Numerical and image-array processing |
+| Keras | Model training and inference |
+| MobileNetV2 | CNN architecture |
+| NumPy | Numerical processing |
 | Pillow | Image loading and conversion |
-| Streamlit | Interactive web dashboard |
-| Matplotlib | Training and evaluation visualizations |
-| Scikit-learn | Model evaluation utilities |
-| Git & GitHub | Version control and source hosting |
+| Streamlit | Interactive dashboard |
+| Matplotlib | Visualization |
+| Scikit-learn | Evaluation utilities |
+| Git & GitHub | Version control and hosting |
 
 ---
 
-## 📁 Project Structure
+# 📁 Project Structure
 
 ```text
 Smart-Drug-Recognition-System/
-|
-|-- docs/
-|   |-- LEEN364__Smart_Drug_Recognition.pdf
-|   |-- PRESENTATION_Smart_Drug_Recogniton.pdf
-|
-|-- interface/
-|   |-- __init__.py
-|   |-- app_ui.py
-|   |-- inference.py
-|
-|-- models/
-|   |-- smart_drug_model.keras
-|
-|-- results/
-|   |-- accuracy_loss_plots/
-|   |-- confusion_matrix/
-|   |-- dataset_summary/
-|   |-- sample_predictions/
-|   |-- training_history.json
-|
-|-- scripts/
-|   |-- check_project.py
-|
-|-- src/
-|   |-- config.py
-|   |-- data_preprocessing/
-|   |-- training/
-|   |-- evaluation/
-|
-|-- tests/
-|   |-- test_inference.py
-|
-|-- .gitignore
-|-- README.md
-|-- requirements.txt
-|-- requirements-demo.txt
+│
+├── docs/
+│   ├── LEEN364__Smart_Drug_Recognition.pdf
+│   └── PRESENTATION_Smart_Drug_Recogniton.pdf
+│
+├── interface/
+│   ├── __init__.py
+│   ├── app_ui.py
+│   └── inference.py
+│
+├── models/
+│   └── smart_drug_model.keras
+│
+├── results/
+│   ├── accuracy_loss_plots/
+│   ├── confusion_matrix/
+│   ├── dataset_summary/
+│   ├── sample_predictions/
+│   └── training_history.json
+│
+├── scripts/
+│   └── check_project.py
+│
+├── src/
+│   ├── config.py
+│   ├── data_preprocessing/
+│   ├── training/
+│   └── evaluation/
+│
+├── tests/
+│   ├── __init__.py
+│   └── test_inference.py
+│
+├── .gitignore
+├── README.md
+├── requirements.txt
+└── requirements-demo.txt
 ```
+
+### Important Files
+
+- `interface/app_ui.py` — Streamlit dashboard
+- `interface/inference.py` — Image preprocessing and prediction helpers
+- `models/smart_drug_model.keras` — Saved trained CNN
+- `requirements-demo.txt` — Dependencies for running the dashboard
+- `requirements.txt` — Full project dependencies
+- `scripts/check_project.py` — Project file checks
+- `tests/test_inference.py` — Automated unit tests
 
 ---
 
-## 🚀 Installation and Setup
-
-### Prerequisites
-
-- Python 3.11
-- Git
-- Internet access for installing dependencies
-- Sufficient available disk space
-- Windows, Linux, or macOS with compatible dependencies
-
-The application has been run successfully on Windows using Python 3.11.9 and TensorFlow 2.19.1.
-
-### Step 1 — Clone the Repository
-
-```bash
-git clone https://github.com/AhmedBahgat-22/Smart-Drug-Recognition-System.git
-cd Smart-Drug-Recognition-System
-```
-
-### Step 2 — Create a Virtual Environment
-
-```bash
-python -m venv .venv
-```
-
-**Windows PowerShell:**
-
-```powershell
-.\.venv\Scripts\Activate.ps1
-```
-
-**Linux / macOS:**
-
-```bash
-source .venv/bin/activate
-```
-
-### Step 3 — Install Dependencies
-
-```bash
-python -m pip install -r requirements-demo.txt
-```
-
-> Installation note: TensorFlow is a large dependency. Ensure sufficient free disk space. A clean installation attempt on the development computer was interrupted by a full disk and has not yet been successfully repeated.
-
-### Step 4 — Verify Project Files
-
-```bash
-python scripts/check_project.py
-```
-
-### Step 5 — Launch the Application
-
-```bash
-python -m streamlit run interface/app_ui.py
-```
-
-Open the local URL displayed in your terminal, typically:
-
-**http://localhost:8501**
-
-### Step 6 — Try a Prediction
-
-1. Open the Prediction section.
-2. Upload a supported medicine-package image.
-3. Preview the uploaded image.
-4. Review the predicted class and model scores.
-5. Explore the Performance and About Project sections.
-
-**Important:** A model score represents the classifier's output, not a validated probability that a medicine is authentic.
-
----
-
-## 🧪 Testing and Quality Assurance
-
-The project includes automated unit tests.
-
-### Run the Tests
-
-```bash
-python -m unittest discover -s tests -v
-```
-
-### Additional Checks
-
-```bash
-python scripts/check_project.py
-python -m compileall -q interface src tests scripts
-```
-
-### Verified Test Results
-
-The following four tests passed on Windows with Python 3.11.9:
-
-| Test | Result |
-|---|---|
-| Class label mapping | PASSED |
-| Image preprocessing shape and range | PASSED |
-| Invalid prediction score rejection | PASSED |
-| RGBA image handling | PASSED |
-
-**Result: 4 / 4 tests passed.**
-
-The project was also launched through Streamlit and used for image inference on the developer's computer. A GitHub-cloned copy was launched using the previously working Python environment.
-
-Automated tests do not establish real-world pharmaceutical authenticity performance, and a fully independent clean-environment setup remains to be verified.
-
----
-
-## 📦 Dataset Information
+# 📦 Dataset Information
 
 The team referenced the following dataset:
 
 **[Fake vs Real Medicine Dataset — Kaggle](https://www.kaggle.com/datasets/surajkumarjha1/fake-vs-real-medicine-datasets-images)**
 
-### Recorded Dataset Summary
+## Recorded Dataset Summary
 
 | Category | Raw Images |
 |---|---:|
@@ -358,117 +496,343 @@ The team referenced the following dataset:
 | Counterfeit | 240 |
 | **Total** | **661** |
 
-The original dataset and prepared training, validation, and test image folders are **not included** in the GitHub repository.
+The original images and prepared training/validation/test splits are not included in this repository.
 
-### Expected Raw Dataset Layout
+## Expected Dataset Structure
 
 ```text
 dataset/
-    raw/
-        original/
-        counterfeit/
+└── raw/
+    ├── original/
+    └── counterfeit/
 ```
 
-### Prepare the Dataset
+## Prepare the Dataset
 
-After obtaining the dataset and placing its images in the expected folders:
+After obtaining the dataset and placing the images inside the expected folders:
 
 ```bash
 python -m src.data_preprocessing.prepare_dataset --clean-processed --skip-corrupt
 ```
 
-The dataset source, redistribution rights, and exact reproduction of the original split should be confirmed before retraining.
+Check the source license, class organization, and image distribution before retraining.
 
 ---
 
-## 🧠 Model Training and Evaluation
+# 🧠 Training and Evaluation
 
-The repository contains the source code used for data preparation, training, and evaluation.
+The repository includes source code for the model training and evaluation workflow.
 
-### Train the Model
+**Training is not required to use the saved Streamlit demo.**
 
-After preparing the dataset and installing the full dependencies from `requirements.txt`:
+## Install Full Training Dependencies
+
+Inside the project environment:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+## Train the Model
+
+After preparing the dataset:
 
 ```bash
 python -m src.training.train_model
 ```
 
-### Evaluate the Model
+## Evaluate the Model
 
 ```bash
 python -m src.evaluation.evaluate_model
 ```
 
-> **Note:** Retraining may overwrite existing model files or evaluation outputs. Preserve backups before running training or evaluation scripts.
+**Warning:** Training or evaluation may overwrite the saved model or existing results. Back up the original artifacts before rerunning these scripts.
 
-The included `.keras` model can be used by the Streamlit application without retraining.
-
----
-
-## 📄 Academic Documentation
-
-The original academic documents are included:
-
-- **[Project Report (PDF)](docs/LEEN364__Smart_Drug_Recognition.pdf)**
-- **[Project Presentation (PDF)](docs/PRESENTATION_Smart_Drug_Recogniton.pdf)**
-
-These files are retained from the collaborative team project. Original authorship and contributions should be acknowledged appropriately.
+Exact training reproduction requires confirming the original dataset split and training settings.
 
 ---
 
-## ⚠️ Limitations
+# 🧪 Testing and Quality Assurance
 
-This system has several important research limitations:
+The project includes automated tests covering inference-related functionality.
 
-1. Historical test accuracy is based on a limited dataset.
-2. Performance on new medicine brands and packaging designs is not established.
-3. Lighting, image resolution, camera angle, and background may influence predictions.
-4. The model cannot inspect pharmaceutical ingredients or manufacturing records.
-5. Model output scores are not calibrated authenticity probabilities.
-6. The training dataset is not distributed with the repository.
-7. Full clean-environment installation and training reproducibility remain unverified.
+## Run Unit Tests
 
-**The system must not be used as a substitute for pharmacists, manufacturers, or official medicine-verification procedures.**
+On Windows:
+
+```powershell
+.\.venv\Scripts\python.exe -m unittest discover -s tests -v
+```
+
+Alternatively, with pytest installed:
+
+```powershell
+.\.venv\Scripts\python.exe -m pytest tests -v
+```
+
+## Run File Integrity Checks
+
+```powershell
+.\.venv\Scripts\python.exe scripts/check_project.py
+```
+
+## Verify Python Syntax
+
+```powershell
+.\.venv\Scripts\python.exe -m compileall -q interface src tests scripts
+```
+
+## Verified Results
+
+Four automated tests passed using Python 3.11.9:
+
+| Test | Result |
+|---|---|
+| Class label mapping | PASSED |
+| Image preprocessing shape and range | PASSED |
+| Invalid score rejection | PASSED |
+| RGBA image handling | PASSED |
+
+**4 / 4 tests passed.**
+
+The Streamlit application was also launched and used for image inference on the development computer.
+
+A cloned copy from GitHub was successfully opened using a previously working Python environment.
+
+A completely fresh environment installation remains unverified because a prior attempt ran out of disk space while installing TensorFlow.
+
+The automated tests do not validate medicine authenticity or guarantee accuracy on unseen packaging.
 
 ---
 
-## 🔮 Future Improvements
+# 🛠️ Troubleshooting
+
+This section covers common setup problems and issues observed during development.
+
+## 1. Python 3.11 Not Found
+
+**Problem:**
+
+```text
+No suitable Python runtime found
+```
+
+**Solution:**
+
+Install Python 3.11 (64-bit), then verify:
+
+```powershell
+py -3.11 --version
+```
+
+## 2. Virtual Environment Not Found
+
+**Problem:**
+
+```text
+.\.venv\Scripts\python.exe is not recognized
+```
+
+**Solution:**
+
+Check that the terminal is inside the repository root:
+
+```powershell
+Get-Location
+```
+
+Then create the environment:
+
+```powershell
+py -3.11 -m venv .venv
+```
+
+Verify:
+
+```powershell
+Test-Path .\.venv\Scripts\python.exe
+```
+
+The expected result is `True`.
+
+## 3. No Module Named Streamlit
+
+**Problem:**
+
+```text
+No module named streamlit
+```
+
+**Solution:**
+
+Install the complete demo requirements:
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install --no-cache-dir -r requirements-demo.txt
+```
+
+Confirm the installation:
+
+```powershell
+.\.venv\Scripts\python.exe -m streamlit --version
+```
+
+## 4. TensorFlow Import Error
+
+**Possible error:**
+
+```text
+ImportError: cannot import name 'pywrap_tensorflow'
+```
+
+This can happen if the TensorFlow installation is incomplete or the environment has incompatible dependencies.
+
+Check TensorFlow installation metadata:
+
+```powershell
+.\.venv\Scripts\python.exe -m pip show tensorflow
+```
+
+If TensorFlow is missing or the installation previously failed:
+
+1. Check available disk space.
+2. Ensure the Python environment uses a compatible version.
+3. Reinstall the project requirements only after resolving the original installation error.
+
+Avoid changing the trained model file to fix dependency errors.
+
+If a clean reinstall is required, recreate only the local `.venv` environment after preserving project files.
+
+## 5. Insufficient Disk Space
+
+**Possible error:**
+
+```text
+OSError: [Errno 28] No space left on device
+```
+
+On Windows, check free space:
+
+```powershell
+Get-PSDrive C | Select-Object Name,Used,Free
+```
+
+TensorFlow downloads and installation can consume substantial disk space.
+
+At least 5 GB of free disk space is recommended for setup, although exact requirements vary.
+
+You may clear pip's downloaded package cache:
+
+```powershell
+py -3.11 -m pip cache purge
+```
+
+This does not uninstall the libraries already installed in your environments.
+
+Only remove virtual environments you are sure you no longer need.
+
+## 6. Port 8501 Already in Use
+
+Run Streamlit on another port:
+
+```powershell
+.\.venv\Scripts\python.exe -m streamlit run interface/app_ui.py --server.port 8502
+```
+
+Then open:
+
+```text
+http://localhost:8502
+```
+
+## 7. Trained Model Not Found
+
+Verify that this file exists:
+
+```text
+models/smart_drug_model.keras
+```
+
+The saved model is included in the repository. If the file is missing, confirm that the repository download or clone completed correctly.
+
+Run the application from the repository root.
+
+## 8. PowerShell Activation Is Blocked
+
+You do not need to change your PowerShell execution policy.
+
+Instead, use the virtual environment's Python directly:
+
+```powershell
+.\.venv\Scripts\python.exe -m streamlit run interface/app_ui.py
+```
+
+---
+
+# 📄 Academic Documentation
+
+The original team documents are available in the repository:
+
+- [Project Report (PDF)](docs/LEEN364__Smart_Drug_Recognition.pdf)
+- [Team Presentation (PDF)](docs/PRESENTATION_Smart_Drug_Recogniton.pdf)
+
+These documents originate from the collaborative academic project. Their original attribution should be respected.
+
+---
+
+# ⚠️ Research Limitations
+
+The system has several important limitations:
+
+1. Recorded accuracy comes from a limited evaluation dataset.
+2. Independent validation on new medicine brands has not been established.
+3. Camera angle, lighting, image quality, and background can influence predictions.
+4. The model cannot inspect chemical ingredients or manufacturing records.
+5. Prediction scores are not calibrated authenticity probabilities.
+6. Original training images are not distributed with the repository.
+7. Exact training reproducibility and fully independent installation remain unverified.
+
+**This model is not a replacement for a pharmacist, manufacturer, or official pharmaceutical verification system.**
+
+---
+
+# 🔮 Future Improvements
 
 Potential future developments include:
 
-- Evaluating the model on independently collected medicine-package images
-- Increasing dataset diversity and class balance
-- Improving generalization to different lighting and image conditions
-- Investigating explainability methods such as Grad-CAM
-- Adding more detailed model evaluation and error analysis
-- Improving the interactive dashboard
-- Testing clean installation across supported environments
-- Publishing an optional hosted research demonstration
-- Documenting reproducible dataset splits and training settings
+- Collecting more diverse medicine-packaging images
+- Testing on an independently collected dataset
+- Improving model generalization and error analysis
+- Exploring Grad-CAM explainability
+- Improving dashboard visualization and usability
+- Documenting reproducible dataset splits
+- Validating installation on multiple operating systems
+- Optionally deploying a public research demo
 
-These are proposed improvements, not existing implemented capabilities.
+These are proposed improvements and are not claimed as implemented features.
 
 ---
 
-## 👨‍💻 Project Credits
+# 👨‍💻 Project Credits
 
 **Smart Drug Recognition System** was developed collaboratively as an academic team project.
 
-**GitHub Repository Owner / Team Contributor:** Ahmed Abdelmoula
+**Repository Owner / Team Contributor:** Ahmed Abdelmoula
 
 **University:** Istanbul Arel University  
 **Faculty:** Faculty of Engineering  
 **Course:** LEEN364 — Deep Learning and Classification Techniques
 
-This repository is maintained by Ahmed Abdelmoula as a personal GitHub copy of the shared team project.
+This repository is Ahmed Abdelmoula's personal GitHub copy of the shared team project.
 
-The source code, trained model, evaluation artifacts, and original documentation are collaborative work. Repository ownership does not imply exclusive authorship.
+The source code, saved model, original evaluation results, and team documentation are collaborative work. Repository ownership does not imply sole authorship.
 
-Additional team member names and individual contributions may be documented after confirmation.
+Additional confirmed team credits and individual contributions may be included here.
 
 ---
 
-## 📬 Repository
+# 📬 Repository
 
 **GitHub:** [AhmedBahgat-22 / Smart-Drug-Recognition-System](https://github.com/AhmedBahgat-22/Smart-Drug-Recognition-System)
 
@@ -476,4 +840,4 @@ Additional team member names and individual contributions may be documented afte
 
 ### ⭐ Smart Drug Recognition System
 
-*Exploring deep learning, computer vision, and medicine-packaging image classification through academic research.*
+*Exploring Deep Learning, Computer Vision, and AI-based medicine packaging image classification through academic research.*
